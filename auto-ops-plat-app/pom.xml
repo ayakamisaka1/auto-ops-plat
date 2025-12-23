@@ -13,10 +13,18 @@
     <name>auto-ops-plat-app</name>
     <description>auto-ops-plat-app</description>
 
+
     <properties>
         <java.version>21</java.version>
     </properties>
     <dependencies>
+        <!--基础设施层-->
+        <dependency>
+            <groupId>xsj</groupId>
+            <artifactId>auto-ops-plat-infrastructure</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--基础设施层-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -29,6 +37,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <!-- 关键：ConfigurationProperties 支持 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
