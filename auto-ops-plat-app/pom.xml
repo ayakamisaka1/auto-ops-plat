@@ -25,6 +25,13 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!--基础设施层-->
+        <!--接口层-->
+        <dependency>
+            <groupId>xsj</groupId>
+            <artifactId>auto-ops-plat-trigger</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--接口层-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>

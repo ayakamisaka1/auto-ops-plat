@@ -22,6 +22,7 @@
         <module>auto-ops-plat-trigger</module>
         <module>auto-ops-plat-infrastructure</module>
         <module>auto-ops-plat-types</module>
+        <module>auto-ops-plat-application</module>
     </modules>
 
     <properties>
