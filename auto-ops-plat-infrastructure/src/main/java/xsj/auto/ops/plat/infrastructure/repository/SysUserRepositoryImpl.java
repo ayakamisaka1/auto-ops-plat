@@ -13,7 +13,7 @@ import java.util.Optional;
 public class SysUserRepositoryImpl implements SysUserRepository {
 
     private final SysUserJpaRepository sysUserJpaRepository;
-
+    private final SysUserMapper SysUserMapper;
     @Override
     public void save(SysUser user) {
         SysUserPO po = SysUserMapper.toJpa(user);
@@ -23,8 +23,7 @@ public class SysUserRepositoryImpl implements SysUserRepository {
 
     @Override
     public Optional<SysUser> findById(Long id) {
-        Optional<SysUserPO> byId = sysUserJpaRepository.findById(id);
-        return Optional.of(SysUserMapper.toDomain(byId.get()));
+        return sysUserJpaRepository.findById(id).map(SysUserMapper::toDomain);
     }
 
     @Override

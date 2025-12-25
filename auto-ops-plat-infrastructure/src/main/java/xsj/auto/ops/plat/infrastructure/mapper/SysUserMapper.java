@@ -1,11 +1,12 @@
 package xsj.auto.ops.plat.infrastructure.mapper;
 
+import org.springframework.stereotype.Component;
 import xsj.auto.ops.plat.domain.entity.SysUser;
 import xsj.auto.ops.plat.infrastructure.jpaEntity.SysUserPO;
-
+@Component
 public class SysUserMapper {
 
-    public static SysUserPO toJpa(SysUser user) {
+    public  SysUserPO toJpa(SysUser user) {
         SysUserPO po = new SysUserPO();
         // 注意：不设置 id
         po.setUsername(user.getUsername());
@@ -13,7 +14,7 @@ public class SysUserMapper {
         return po;
     }
 
-    public static SysUser toDomain(SysUserPO po) {
+    public  SysUser toDomain(SysUserPO po) {
         return SysUser.create(po.getId(), po.getUsername(), po.getPassword());
     }
 }

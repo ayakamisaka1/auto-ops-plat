@@ -1,10 +1,8 @@
 package xsj.auto.ops.plat.domain.entity;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 public class SysUser {
 
     private Long id;
