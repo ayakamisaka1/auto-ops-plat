@@ -51,6 +51,12 @@ public class AiLlmProviderPO extends BaseJpaEntity{
     @Column(name = "auth_type", nullable = false, length = 32)
     private String authType;
     /**
+     * key
+     */
+    @Comment("鉴权方式类型")
+    @Column(name = "api_key", nullable = false, length = 225)
+    private String apiKey;
+    /**
      * 提供方状态 * <p> * ACTIVE：可用 * DISABLED：已禁用（不可被选择）
      */
     @Comment("提供方状态")

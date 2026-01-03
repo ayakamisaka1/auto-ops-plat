@@ -16,13 +16,7 @@ import org.hibernate.annotations.Comment;
 @Table(name = "ai_llm_endpoint")
 @Comment("LLM 模型能力接口定义表")
 public class AiLlmEndpointPO extends BaseJpaEntity{
-    /**
-     * LLM 服务提供商 ID
-     */
-    @Comment("LLM 服务提供商 ID")
-    @ManyToOne
-    @JoinColumn(name = "provider_id", nullable = false, foreignKey = @ForeignKey(name = "fk_llm_endpoint_provider"))
-    private AiLlmProviderPO aiLlmProviderPO;
+
     /**
      * 模型 ID
      */
