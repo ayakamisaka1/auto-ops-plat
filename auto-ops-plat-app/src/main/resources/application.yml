@@ -16,8 +16,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
-
+  ai:
+    openai:
+      speech:
+        enabled: false
 auto:
   ops:
     thread:
