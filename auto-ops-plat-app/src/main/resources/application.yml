@@ -18,8 +18,8 @@ spring:
         format_sql: true
   ai:
     openai:
-      speech:
-        enabled: false
+      base-url: xxx
+      api-key: xxx
 auto:
   ops:
     thread:
