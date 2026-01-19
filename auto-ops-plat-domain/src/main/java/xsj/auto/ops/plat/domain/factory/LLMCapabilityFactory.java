@@ -1,7 +1,7 @@
 package xsj.auto.ops.plat.domain.factory;
 
-import xsj.auto.ops.plat.domain.entity.LlmfactoryEntity.ChatModelWrapper;
-import xsj.auto.ops.plat.domain.entity.LlmfactoryEntity.LLMCapability;
+import xsj.auto.ops.plat.domain.entity.LlmFactoryEntity.ChatModelWrapper;
+import xsj.auto.ops.plat.domain.entity.LlmFactoryEntity.LLMCapability;
 
 public interface LLMCapabilityFactory {
     /**

@@ -1,6 +1,6 @@
 package xsj.auto.ops.plat.domain.repository;
 
-import xsj.auto.ops.plat.domain.entity.AiLlmProvider;
+import xsj.auto.ops.plat.domain.entity.LlmFactoryEntity.AiLlmProvider;
 
 import java.util.List;
 import java.util.Optional;
