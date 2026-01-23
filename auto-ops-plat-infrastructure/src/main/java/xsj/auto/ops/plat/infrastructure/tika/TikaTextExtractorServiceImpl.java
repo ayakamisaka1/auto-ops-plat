@@ -85,9 +85,7 @@ public class TikaTextExtractorServiceImpl implements TextExtractorService {
             Metadata metadata = new Metadata();
             
             // 设置文件名到元数据，有助于Tika更准确地检测文件类型
-            if (source.getFileName() != null) {
-                metadata.set(Metadata.RESOURCE_NAME_KEY, source.getFileName());
-            }
+
             
             // 如果提供了MIME类型，也设置到元数据中
             if (source.getMimeType() != null) {

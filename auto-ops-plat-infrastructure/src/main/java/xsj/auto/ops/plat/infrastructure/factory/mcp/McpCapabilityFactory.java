@@ -1,7 +1,7 @@
 package xsj.auto.ops.plat.infrastructure.factory.mcp;
 
 import io.modelcontextprotocol.client.McpSyncClient;
-import org.springframework.ai.tool.McpToolCallbackProvider;
+import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.ai.tool.ToolCallback;
 import xsj.auto.ops.plat.infrastructure.jpaEntity.mcp.McpConnectionConfigPO;
 
@@ -44,7 +44,7 @@ public abstract class McpCapabilityFactory {
         
         // 3. 获取ToolCallbacks
         // 使用McpToolCallbackProvider替代已弃用的SyncMcpToolCallbackProvider
-        McpToolCallbackProvider callbackProvider = new McpToolCallbackProvider(mcpSyncClient);
+        SyncMcpToolCallbackProvider callbackProvider = new SyncMcpToolCallbackProvider(mcpSyncClient);
         ToolCallback[] toolCallbacks = callbackProvider.getToolCallbacks();
         
         // 4. 转换为List并返回
