@@ -10,4 +10,6 @@ public interface AiLlmModelJpaRepository extends JpaRepository<AiLlmModelPO, Lon
     List<AiLlmModelPO> findByProviderId(Long providerId);
     List<AiLlmModelPO> findByModelType(String modelType);
     List<AiLlmModelPO> findByStatus(String status);
+    Optional<AiLlmModelPO> findByModelCodeAndProviderId(String modelCode, Long providerId);
+    List<AiLlmModelPO> findByProviderIdAndStatus(Long providerId, String status);
 }
