@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ToolJpaRepository extends JpaRepository<ToolPO, Long> {
     Optional<ToolPO> findByToolCode(String toolCode);
-    List<ToolPO> findByMcpServiceId(Long mcpServiceId);
+    List<ToolPO> findByMcpServicePO_Id(Long mcpServiceId);
     List<ToolPO> findByRiskLevel(Integer riskLevel);
     List<ToolPO> findByStatus(Integer status);
 }

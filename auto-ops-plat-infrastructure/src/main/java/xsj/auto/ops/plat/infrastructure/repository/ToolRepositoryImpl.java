@@ -51,7 +51,7 @@ public class ToolRepositoryImpl implements ToolRepository {
 
     @Override
     public List<Tool> findByMcpServiceId(Long mcpServiceId) {
-        return toolJpaRepository.findByMcpServiceId(mcpServiceId).stream()
+        return toolJpaRepository.findByMcpServicePO_Id(mcpServiceId).stream()
                 .map(toolMapper::toDomain)
                 .collect(Collectors.toList());
     }
