@@ -2,13 +2,13 @@ package xsj.auto.ops.plat.infrastructure.mapper;
 
 import org.springframework.stereotype.Component;
 import xsj.auto.ops.plat.domain.entity.RagChunk;
-import xsj.auto.ops.plat.infrastructure.jpaEntity.rag.RagChunk;
+import xsj.auto.ops.plat.infrastructure.jpaEntity.rag.RagChunkPO;
 
 @Component
 public class RagChunkMapper {
 
-    public RagChunk toJpa(RagChunk chunk) {
-        RagChunk po = new RagChunk();
+    public RagChunkPO toJpa(RagChunk chunk) {
+        RagChunkPO po = new RagChunkPO();
         if (chunk.getId() != null) {
             po.setId(chunk.getId());
         }

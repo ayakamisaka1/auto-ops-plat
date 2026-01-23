@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import xsj.auto.ops.plat.domain.entity.RagChunk;
 import xsj.auto.ops.plat.domain.repository.RagChunkRepository;
-import xsj.auto.ops.plat.infrastructure.jpaEntity.rag.RagChunk;
+import xsj.auto.ops.plat.infrastructure.jpaEntity.rag.RagChunkPO;
 import xsj.auto.ops.plat.infrastructure.mapper.RagChunkMapper;
 
 import java.util.List;
