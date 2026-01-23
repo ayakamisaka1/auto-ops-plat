@@ -12,7 +12,7 @@ public class AiLlmEndpointMapper {
         if (endpoint.getId() != null) {
             po.setId(endpoint.getId());
         }
-        po.setModelId(endpoint.getModelId());
+        //po.setAiLlmModelPO(endpoint.getModelId());
         po.setCapabilityType(endpoint.getCapabilityType());
         po.setHttpMethod(endpoint.getHttpMethod());
         po.setPath(endpoint.getPath());
@@ -24,7 +24,7 @@ public class AiLlmEndpointMapper {
     public AiLlmEndpoint toDomain(AiLlmEndpointPO po) {
         return AiLlmEndpoint.restore(
                 po.getId(),
-                po.getModelId(),
+                po.getAiLlmModelPO().getId(),
                 po.getCapabilityType(),
                 po.getHttpMethod(),
                 po.getPath(),

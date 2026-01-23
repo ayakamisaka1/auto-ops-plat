@@ -21,7 +21,7 @@ public class RagChunkMapper {
         return po;
     }
 
-    public RagChunk toDomain(RagChunk po) {
+    public RagChunk toDomain(RagChunkPO po) {
         return RagChunk.create(
                 po.getId(),
                 po.getDocumentId(),

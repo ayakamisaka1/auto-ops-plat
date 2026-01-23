@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AiLlmModelJpaRepository extends JpaRepository<AiLlmModelPO, Long> {
-    List<AiLlmModelPO> findByProviderId(Long providerId);
+    List<AiLlmModelPO> findByAiLlmProviderPO_Id(Long providerId);
     List<AiLlmModelPO> findByModelType(String modelType);
     List<AiLlmModelPO> findByStatus(String status);
-    Optional<AiLlmModelPO> findByModelCodeAndProviderId(String modelCode, Long providerId);
-    List<AiLlmModelPO> findByProviderIdAndStatus(Long providerId, String status);
+    Optional<AiLlmModelPO> findByModelCodeAndAiLlmProviderPO_Id(String modelCode, Long providerId);
+    List<AiLlmModelPO> findByAiLlmProviderPO_IdAndStatus(Long providerId, String status);
 }

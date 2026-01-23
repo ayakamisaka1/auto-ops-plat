@@ -13,7 +13,7 @@ import xsj.auto.ops.plat.infrastructure.jpaEntity.BaseJpaEntity;
 @Getter
 @Setter
 @Comment("RAG 文档切分表：最小可检索语义单元")
-public class RagChunk extends BaseJpaEntity {
+public class RagChunkPO extends BaseJpaEntity {
     @Column(nullable = false)
     @Comment("所属文档ID")
     private Long documentId;

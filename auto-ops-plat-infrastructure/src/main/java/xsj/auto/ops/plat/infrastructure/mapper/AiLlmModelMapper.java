@@ -12,7 +12,7 @@ public class AiLlmModelMapper {
         if (model.getId() != null) {
             po.setId(model.getId());
         }
-        po.setProviderId(model.getProviderId());
+       // po.setProviderId(model.getProviderId());
         po.setModelCode(model.getModelCode());
         po.setModelName(model.getModelName());
         po.setModelVersion(model.getModelVersion());
@@ -30,7 +30,7 @@ public class AiLlmModelMapper {
     public AiLlmModel toDomain(AiLlmModelPO po) {
         return AiLlmModel.restore(
                 po.getId(),
-                po.getProviderId(),
+                po.getAiLlmProviderPO().getId(),
                 po.getModelCode(),
                 po.getModelName(),
                 po.getModelVersion(),

@@ -36,7 +36,7 @@ public class AiLlmEndpointRepositoryImpl implements AiLlmEndpointRepository {
 
     @Override
     public List<AiLlmEndpoint> findByModelId(Long modelId) {
-        return aiLlmEndpointJpaRepository.findByModelId(modelId).stream()
+        return aiLlmEndpointJpaRepository.findByAiLlmModelPO_Id(modelId).stream()
                 .map(aiLlmEndpointMapper::toDomain)
                 .collect(Collectors.toList());
     }

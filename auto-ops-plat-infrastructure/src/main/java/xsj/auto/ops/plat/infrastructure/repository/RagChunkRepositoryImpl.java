@@ -20,8 +20,8 @@ public class RagChunkRepositoryImpl implements RagChunkRepository {
 
     @Override
     public void save(RagChunk chunk) {
-        RagChunk po = ragChunkMapper.toJpa(chunk);
-        RagChunk saved = ragChunkJpaRepository.save(po);
+        RagChunkPO po = ragChunkMapper.toJpa(chunk);
+        RagChunkPO saved = ragChunkJpaRepository.save(po);
         chunk.assignId(saved.getId());
     }
 

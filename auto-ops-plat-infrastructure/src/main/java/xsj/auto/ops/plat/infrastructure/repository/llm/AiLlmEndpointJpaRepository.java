@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.infrastructure.jpaEntity.llm.AiLlmEndpointPO;
 import java.util.List;
 
 public interface AiLlmEndpointJpaRepository extends JpaRepository<AiLlmEndpointPO, Long> {
-    List<AiLlmEndpointPO> findByModelId(Long modelId);
+    List<AiLlmEndpointPO> findByAiLlmModelPO_Id(Long modelId);
     List<AiLlmEndpointPO> findByCapabilityType(String capabilityType);
     List<AiLlmEndpointPO> findByStatus(String status);
 }

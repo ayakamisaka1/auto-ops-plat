@@ -35,13 +35,13 @@ public class AiLlmModelRepositoryImpl implements AiLlmModelRepository {
 
     @Override
     public Optional<AiLlmModel> findByModelCodeAndProviderId(String modelCode, Long providerId) {
-        return aiLlmModelJpaRepository.findByModelCodeAndProviderId(modelCode, providerId)
+        return aiLlmModelJpaRepository.findByModelCodeAndAiLlmProviderPO_Id(modelCode, providerId)
                 .map(aiLlmModelMapper::toDomain);
     }
 
     @Override
     public List<AiLlmModel> findByProviderId(Long providerId) {
-        return aiLlmModelJpaRepository.findByProviderId(providerId).stream()
+        return aiLlmModelJpaRepository.findByAiLlmProviderPO_Id(providerId).stream()
                 .map(aiLlmModelMapper::toDomain)
                 .collect(Collectors.toList());
     }
@@ -62,7 +62,7 @@ public class AiLlmModelRepositoryImpl implements AiLlmModelRepository {
 
     @Override
     public List<AiLlmModel> findByProviderIdAndStatus(Long providerId, String status) {
-        return aiLlmModelJpaRepository.findByProviderIdAndStatus(providerId, status).stream()
+        return aiLlmModelJpaRepository.findByAiLlmProviderPO_IdAndStatus(providerId, status).stream()
                 .map(aiLlmModelMapper::toDomain)
                 .collect(Collectors.toList());
     }
