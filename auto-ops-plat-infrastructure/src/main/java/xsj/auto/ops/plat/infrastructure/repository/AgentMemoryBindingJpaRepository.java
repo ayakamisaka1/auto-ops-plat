@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface AgentMemoryBindingJpaRepository extends JpaRepository<AgentMemoryBindingPO, Long> {
     List<AgentMemoryBindingPO> findByAgentId(String agentId);
-    List<AgentMemoryBindingPO> findByMemoryPolicyId(Long memoryPolicyId);
+    List<AgentMemoryBindingPO> findByMemoryPolicy_Id(Long memoryPolicyId);
     List<AgentMemoryBindingPO> findByActive(Boolean active);
 }

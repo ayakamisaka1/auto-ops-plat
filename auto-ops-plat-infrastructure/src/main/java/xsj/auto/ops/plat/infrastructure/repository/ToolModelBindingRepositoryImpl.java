@@ -45,14 +45,14 @@ public class ToolModelBindingRepositoryImpl implements ToolModelBindingRepositor
 
     @Override
     public List<ToolModelBinding> findByToolId(Long toolId) {
-        return toolModelBindingJpaRepository.findByToolId(toolId).stream()
+        return toolModelBindingJpaRepository.findByToolPO_Id(toolId).stream()
                 .map(toolModelBindingMapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<ToolModelBinding> findByLlmModelId(Long llmModelId) {
-        return toolModelBindingJpaRepository.findByLlmModelId(llmModelId).stream()
+        return toolModelBindingJpaRepository.findByLlmModel_Id(llmModelId).stream()
                 .map(toolModelBindingMapper::toDomain)
                 .collect(Collectors.toList());
     }

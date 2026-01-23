@@ -6,6 +6,6 @@ import xsj.auto.ops.plat.infrastructure.jpaEntity.mcp.ToolModelBindingPO;
 import java.util.List;
 
 public interface ToolModelBindingJpaRepository extends JpaRepository<ToolModelBindingPO, Long> {
-    List<ToolModelBindingPO> findByToolId(Long toolId);
-    List<ToolModelBindingPO> findByLlmModelId(Long llmModelId);
+    List<ToolModelBindingPO> findByToolPO_Id(Long toolId);
+    List<ToolModelBindingPO> findByLlmModel_Id(Long llmModelId);
 }
