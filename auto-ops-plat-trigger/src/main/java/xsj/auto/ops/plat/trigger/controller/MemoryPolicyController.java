@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.MemoryPolicyServiceApi;
 import xsj.auto.ops.plat.api.request.MemoryPolicyRequest;
 import xsj.auto.ops.plat.api.response.MemoryPolicyResponse;
-import xsj.auto.ops.plat.application.entityCase.MemoryPolicyCase;
+import xsj.auto.ops.plat.application.entityCase.impl.MemoryPolicyCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemoryPolicyController implements MemoryPolicyServiceApi {
 
-    private final MemoryPolicyCase memoryPolicyCase;
+    private final MemoryPolicyCaseImpl memoryPolicyCase;
 
     @Override
     @GetMapping("/list")

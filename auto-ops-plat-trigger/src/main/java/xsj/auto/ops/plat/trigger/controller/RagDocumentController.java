@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.RagDocumentServiceApi;
 import xsj.auto.ops.plat.api.request.RagDocumentRequest;
 import xsj.auto.ops.plat.api.response.RagDocumentResponse;
-import xsj.auto.ops.plat.application.entityCase.RagDocumentCase;
+import xsj.auto.ops.plat.application.entityCase.impl.RagDocumentCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RagDocumentController implements RagDocumentServiceApi {
 
-    private final RagDocumentCase ragDocumentCase;
+    private final RagDocumentCaseImpl ragDocumentCase;
 
     @Override
     @GetMapping("/list")

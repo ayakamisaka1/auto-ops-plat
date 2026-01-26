@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.ConversationServiceApi;
 import xsj.auto.ops.plat.api.request.ConversationRequest;
 import xsj.auto.ops.plat.api.response.ConversationResponse;
-import xsj.auto.ops.plat.application.entityCase.ConversationCase;
+import xsj.auto.ops.plat.application.entityCase.impl.ConversationCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ConversationController implements ConversationServiceApi {
 
-    private final ConversationCase conversationCase;
+    private final ConversationCaseImpl conversationCase;
 
     @Override
     @GetMapping("/list")

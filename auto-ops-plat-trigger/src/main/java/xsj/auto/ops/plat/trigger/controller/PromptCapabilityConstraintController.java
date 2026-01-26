@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.PromptCapabilityConstraintServiceApi;
 import xsj.auto.ops.plat.api.request.PromptCapabilityConstraintRequest;
 import xsj.auto.ops.plat.api.response.PromptCapabilityConstraintResponse;
-import xsj.auto.ops.plat.application.entityCase.PromptCapabilityConstraintCase;
+import xsj.auto.ops.plat.application.entityCase.impl.PromptCapabilityConstraintCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PromptCapabilityConstraintController implements PromptCapabilityConstraintServiceApi {
 
-    private final PromptCapabilityConstraintCase promptCapabilityConstraintCase;
+    private final PromptCapabilityConstraintCaseImpl promptCapabilityConstraintCase;
 
     @Override
     @GetMapping("/list")

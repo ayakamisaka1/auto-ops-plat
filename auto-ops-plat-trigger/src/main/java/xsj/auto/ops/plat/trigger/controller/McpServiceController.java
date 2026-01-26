@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.McpServiceServiceApi;
 import xsj.auto.ops.plat.api.request.McpServiceRequest;
 import xsj.auto.ops.plat.api.response.McpServiceResponse;
-import xsj.auto.ops.plat.application.entityCase.McpServiceCase;
+import xsj.auto.ops.plat.application.entityCase.impl.McpServiceCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class McpServiceController implements McpServiceServiceApi {
 
-    private final McpServiceCase mcpServiceCase;
+    private final McpServiceCaseImpl mcpServiceCase;
 
     @Override
     @GetMapping("/list")

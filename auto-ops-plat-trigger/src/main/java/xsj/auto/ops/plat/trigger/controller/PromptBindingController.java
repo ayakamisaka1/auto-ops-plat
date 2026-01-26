@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.PromptBindingServiceApi;
 import xsj.auto.ops.plat.api.request.PromptBindingRequest;
 import xsj.auto.ops.plat.api.response.PromptBindingResponse;
-import xsj.auto.ops.plat.application.entityCase.PromptBindingCase;
+import xsj.auto.ops.plat.application.entityCase.impl.PromptBindingCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PromptBindingController implements PromptBindingServiceApi {
 
-    private final PromptBindingCase promptBindingCase;
+    private final PromptBindingCaseImpl promptBindingCase;
 
     @Override
     @GetMapping("/list")

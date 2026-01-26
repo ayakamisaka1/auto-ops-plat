@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.RagEmbeddingServiceApi;
 import xsj.auto.ops.plat.api.request.RagEmbeddingRequest;
 import xsj.auto.ops.plat.api.response.RagEmbeddingResponse;
-import xsj.auto.ops.plat.application.entityCase.RagEmbeddingCase;
+import xsj.auto.ops.plat.application.entityCase.impl.RagEmbeddingCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RagEmbeddingController implements RagEmbeddingServiceApi {
 
-    private final RagEmbeddingCase ragEmbeddingCase;
+    private final RagEmbeddingCaseImpl ragEmbeddingCase;
 
     @Override
     @GetMapping("/list")

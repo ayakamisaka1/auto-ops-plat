@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.ToolServiceApi;
 import xsj.auto.ops.plat.api.request.ToolRequest;
 import xsj.auto.ops.plat.api.response.ToolResponse;
-import xsj.auto.ops.plat.application.entityCase.ToolCase;
+import xsj.auto.ops.plat.application.entityCase.impl.ToolCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ToolController implements ToolServiceApi {
 
-    private final ToolCase toolCase;
+    private final ToolCaseImpl toolCase;
 
     @Override
     @GetMapping("/list")

@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.RagDataSourceServiceApi;
 import xsj.auto.ops.plat.api.request.RagDataSourceRequest;
 import xsj.auto.ops.plat.api.response.RagDataSourceResponse;
-import xsj.auto.ops.plat.application.entityCase.RagDataSourceCase;
+import xsj.auto.ops.plat.application.entityCase.impl.RagDataSourceCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RagDataSourceController implements RagDataSourceServiceApi {
 
-    private final RagDataSourceCase ragDataSourceCase;
+    private final RagDataSourceCaseImpl ragDataSourceCase;
 
     @Override
     @GetMapping("/list")

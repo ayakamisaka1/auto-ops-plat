@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.RagChunkServiceApi;
 import xsj.auto.ops.plat.api.request.RagChunkRequest;
 import xsj.auto.ops.plat.api.response.RagChunkResponse;
-import xsj.auto.ops.plat.application.entityCase.RagChunkCase;
+import xsj.auto.ops.plat.application.entityCase.impl.RagChunkCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RagChunkController implements RagChunkServiceApi {
 
-    private final RagChunkCase ragChunkCase;
+    private final RagChunkCaseImpl ragChunkCase;
 
     @Override
     @GetMapping("/list")

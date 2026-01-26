@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.McpConnectionConfigServiceApi;
 import xsj.auto.ops.plat.api.request.McpConnectionConfigRequest;
 import xsj.auto.ops.plat.api.response.McpConnectionConfigResponse;
-import xsj.auto.ops.plat.application.entityCase.McpConnectionConfigCase;
+import xsj.auto.ops.plat.application.entityCase.impl.McpConnectionConfigCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class McpConnectionConfigController implements McpConnectionConfigServiceApi {
 
-    private final McpConnectionConfigCase mcpConnectionConfigCase;
+    private final McpConnectionConfigCaseImpl mcpConnectionConfigCase;
 
     @Override
     @GetMapping("/list")

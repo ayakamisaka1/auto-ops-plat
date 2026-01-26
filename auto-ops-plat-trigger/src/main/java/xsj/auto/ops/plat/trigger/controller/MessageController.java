@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.MessageServiceApi;
 import xsj.auto.ops.plat.api.request.MessageRequest;
 import xsj.auto.ops.plat.api.response.MessageResponse;
-import xsj.auto.ops.plat.application.entityCase.MessageCase;
+import xsj.auto.ops.plat.application.entityCase.impl.MessageCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MessageController implements MessageServiceApi {
 
-    private final MessageCase messageCase;
+    private final MessageCaseImpl messageCase;
 
     @Override
     @GetMapping("/list")

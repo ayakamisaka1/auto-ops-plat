@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.PromptDefinitionServiceApi;
 import xsj.auto.ops.plat.api.request.PromptDefinitionRequest;
 import xsj.auto.ops.plat.api.response.PromptDefinitionResponse;
-import xsj.auto.ops.plat.application.entityCase.PromptDefinitionCase;
+import xsj.auto.ops.plat.application.entityCase.impl.PromptDefinitionCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PromptDefinitionController implements PromptDefinitionServiceApi {
 
-    private final PromptDefinitionCase promptDefinitionCase;
+    private final PromptDefinitionCaseImpl promptDefinitionCase;
 
     @Override
     @GetMapping("/list")

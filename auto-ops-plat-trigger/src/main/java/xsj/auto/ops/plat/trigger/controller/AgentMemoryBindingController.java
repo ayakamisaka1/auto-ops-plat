@@ -20,30 +20,31 @@ public class AgentMemoryBindingController implements AgentMemoryBindingServiceAp
     @Override
     @GetMapping("/list")
     public ResultBody<List<AgentMemoryBindingResponse>> list() {
-        return agentMemoryBindingCase.list();
+        return ResultBody.ok(agentMemoryBindingCase.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<AgentMemoryBindingResponse> getById(@PathVariable Long id) {
-        return agentMemoryBindingCase.getById(id);
+        return ResultBody.ok(agentMemoryBindingCase.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<AgentMemoryBindingResponse> create(@RequestBody AgentMemoryBindingRequest request) {
-        return agentMemoryBindingCase.create(request);
+        return ResultBody.ok(agentMemoryBindingCase.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<AgentMemoryBindingResponse> update(@RequestBody AgentMemoryBindingRequest request) {
-        return agentMemoryBindingCase.update(request);
+        return ResultBody.ok(agentMemoryBindingCase.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return agentMemoryBindingCase.delete(id);
+        agentMemoryBindingCase.delete(id);
+        return ResultBody.ok();
     }
 }

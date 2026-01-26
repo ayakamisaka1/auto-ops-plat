@@ -8,7 +8,9 @@
       "Bash(mvn compile:*)",
       "Bash(java:*)",
       "Bash(git checkout:*)",
-      "Bash(mvn clean:*)"
+      "Bash(mvn clean:*)",
+      "Bash(wc:*)",
+      "Bash(git rm:*)"
     ]
   }
 }

@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.RagRetrievalStrategyServiceApi;
 import xsj.auto.ops.plat.api.request.RagRetrievalStrategyRequest;
 import xsj.auto.ops.plat.api.response.RagRetrievalStrategyResponse;
-import xsj.auto.ops.plat.application.entityCase.RagRetrievalStrategyCase;
+import xsj.auto.ops.plat.application.entityCase.impl.RagRetrievalStrategyCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RagRetrievalStrategyController implements RagRetrievalStrategyServiceApi {
 
-    private final RagRetrievalStrategyCase ragRetrievalStrategyCase;
+    private final RagRetrievalStrategyCaseImpl ragRetrievalStrategyCase;
 
     @Override
     @GetMapping("/list")

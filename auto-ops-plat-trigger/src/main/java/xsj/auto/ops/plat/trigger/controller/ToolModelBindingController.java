@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.ToolModelBindingServiceApi;
 import xsj.auto.ops.plat.api.request.ToolModelBindingRequest;
 import xsj.auto.ops.plat.api.response.ToolModelBindingResponse;
-import xsj.auto.ops.plat.application.entityCase.ToolModelBindingCase;
+import xsj.auto.ops.plat.application.entityCase.impl.ToolModelBindingCaseImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ToolModelBindingController implements ToolModelBindingServiceApi {
 
-    private final ToolModelBindingCase toolModelBindingCase;
+    private final ToolModelBindingCaseImpl toolModelBindingCase;
 
     @Override
     @GetMapping("/list")
