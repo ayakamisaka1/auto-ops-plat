@@ -20,30 +20,31 @@ public class ConversationController implements ConversationServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<ConversationResponse>> list() {
-        return conversationService.list();
+        return ResultBody.ok(conversationService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<ConversationResponse> getById(@PathVariable Long id) {
-        return conversationService.getById(id);
+        return ResultBody.ok(conversationService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<ConversationResponse> create(@RequestBody ConversationRequest request) {
-        return conversationService.create(request);
+        return ResultBody.ok(conversationService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<ConversationResponse> update(@RequestBody ConversationRequest request) {
-        return conversationService.update(request);
+        return ResultBody.ok(conversationService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return conversationService.delete(id);
+        conversationService.delete(id);
+        return ResultBody.ok();
     }
 }

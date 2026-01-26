@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.AgentMemoryBindingServiceApi;
 import xsj.auto.ops.plat.api.request.AgentMemoryBindingRequest;
 import xsj.auto.ops.plat.api.response.AgentMemoryBindingResponse;
-import xsj.auto.ops.plat.application.entityCase.AgentMemoryBindingCase;
+import xsj.auto.ops.plat.application.entityCase.AgentMemoryBindingService;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AgentMemoryBindingController implements AgentMemoryBindingServiceApi {
 
-    private final AgentMemoryBindingCase agentMemoryBindingCase;
+    private final AgentMemoryBindingService agentMemoryBindingCase;
 
     @Override
     @GetMapping("/list")
