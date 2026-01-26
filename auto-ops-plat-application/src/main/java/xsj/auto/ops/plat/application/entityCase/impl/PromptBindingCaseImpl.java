@@ -3,11 +3,9 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import xsj.auto.ops.plat.api.common.ResultBody;
-import xsj.auto.ops.plat.api.http.PromptBindingServiceApi;
 import xsj.auto.ops.plat.api.request.PromptBindingRequest;
 import xsj.auto.ops.plat.api.response.PromptBindingResponse;
-import xsj.auto.ops.plat.application.entityCase.PromptBindingCase;
+import xsj.auto.ops.plat.application.entityCase.PromptBindingService;
 import xsj.auto.ops.plat.domain.entity.PromptBinding;
 import xsj.auto.ops.plat.domain.repository.PromptBindingRepository;
 
@@ -16,28 +14,27 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class PromptBindingCaseImpl implements PromptBindingServiceApi {
+public class PromptBindingCaseImpl implements PromptBindingService {
 
     private final PromptBindingRepository promptBindingRepository;
 
     @Override
-    public ResultBody<List<PromptBindingResponse>> list() {
-        return ResultBody.ok(promptBindingRepository.findAll().stream()
+    public List<PromptBindingResponse> list() {
+        return promptBindingRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @Override
-    public ResultBody<PromptBindingResponse> getById(Long id) {
+    public PromptBindingResponse getById(Long id) {
         return promptBindingRepository.findById(id)
                 .map(this::toResponse)
-                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public ResultBody<PromptBindingResponse> create(PromptBindingRequest request) {
+    public PromptBindingResponse create(PromptBindingRequest request) {
         PromptBinding entity = PromptBinding.create(
                 null,
                 request.getBindType(),
@@ -47,12 +44,12 @@ public class PromptBindingCaseImpl implements PromptBindingServiceApi {
                 request.getEnabled()
         );
         promptBindingRepository.save(entity);
-        return ResultBody.ok(toResponse(entity));
+        return toResponse(entity);
     }
 
     @Override
     @Transactional
-    public ResultBody<PromptBindingResponse> update(PromptBindingRequest request) {
+    public PromptBindingResponse update(PromptBindingRequest request) {
         PromptBinding entity = PromptBinding.create(
                 request.getId(),
                 request.getBindType(),
@@ -62,14 +59,13 @@ public class PromptBindingCaseImpl implements PromptBindingServiceApi {
                 request.getEnabled()
         );
         promptBindingRepository.save(entity);
-        return ResultBody.ok(toResponse(entity));
+        return toResponse(entity);
     }
 
     @Override
     @Transactional
-    public ResultBody<Void> delete(Long id) {
+    public void delete(Long id) {
         promptBindingRepository.deleteById(id);
-        return ResultBody.ok();
     }
 
     private PromptBindingResponse toResponse(PromptBinding entity) {

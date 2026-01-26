@@ -3,11 +3,9 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import xsj.auto.ops.plat.api.common.ResultBody;
-import xsj.auto.ops.plat.api.http.McpServiceServiceApi;
 import xsj.auto.ops.plat.api.request.McpServiceRequest;
 import xsj.auto.ops.plat.api.response.McpServiceResponse;
-import xsj.auto.ops.plat.application.entityCase.McpServiceCase;
+import xsj.auto.ops.plat.application.entityCase.McpServiceService;
 import xsj.auto.ops.plat.domain.entity.McpService;
 import xsj.auto.ops.plat.domain.repository.McpServiceRepository;
 
@@ -16,28 +14,27 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class McpServiceCaseImpl implements McpServiceServiceApi {
+public class McpServiceCaseImpl implements McpServiceService {
 
     private final McpServiceRepository mcpServiceRepository;
 
     @Override
-    public ResultBody<List<McpServiceResponse>> list() {
-        return ResultBody.ok(mcpServiceRepository.findAll().stream()
+    public List<McpServiceResponse> list() {
+        return mcpServiceRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @Override
-    public ResultBody<McpServiceResponse> getById(Long id) {
+    public McpServiceResponse getById(Long id) {
         return mcpServiceRepository.findById(id)
                 .map(this::toResponse)
-                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public ResultBody<McpServiceResponse> create(McpServiceRequest request) {
+    public McpServiceResponse create(McpServiceRequest request) {
         McpService entity = McpService.create(
                 null,
                 request.getServiceCode(),
@@ -47,12 +44,12 @@ public class McpServiceCaseImpl implements McpServiceServiceApi {
                 request.getStatus()
         );
         mcpServiceRepository.save(entity);
-        return ResultBody.ok(toResponse(entity));
+        return toResponse(entity);
     }
 
     @Override
     @Transactional
-    public ResultBody<McpServiceResponse> update(McpServiceRequest request) {
+    public McpServiceResponse update(McpServiceRequest request) {
         McpService entity = McpService.create(
                 request.getId(),
                 request.getServiceCode(),
@@ -62,14 +59,13 @@ public class McpServiceCaseImpl implements McpServiceServiceApi {
                 request.getStatus()
         );
         mcpServiceRepository.save(entity);
-        return ResultBody.ok(toResponse(entity));
+        return toResponse(entity);
     }
 
     @Override
     @Transactional
-    public ResultBody<Void> delete(Long id) {
+    public void delete(Long id) {
         mcpServiceRepository.deleteById(id);
-        return ResultBody.ok();
     }
 
     private McpServiceResponse toResponse(McpService entity) {

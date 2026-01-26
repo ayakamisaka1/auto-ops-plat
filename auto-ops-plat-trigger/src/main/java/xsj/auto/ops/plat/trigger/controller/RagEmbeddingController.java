@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.RagEmbeddingServiceApi;
 import xsj.auto.ops.plat.api.request.RagEmbeddingRequest;
 import xsj.auto.ops.plat.api.response.RagEmbeddingResponse;
-import xsj.auto.ops.plat.application.entityCase.impl.RagEmbeddingCaseImpl;
+import xsj.auto.ops.plat.application.entityCase.RagEmbeddingService;
 
 import java.util.List;
 
@@ -15,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RagEmbeddingController implements RagEmbeddingServiceApi {
 
-    private final RagEmbeddingCaseImpl ragEmbeddingCase;
+    private final RagEmbeddingService ragEmbeddingService;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<RagEmbeddingResponse>> list() {
-        return ragEmbeddingCase.list();
+        return ragEmbeddingService.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<RagEmbeddingResponse> getById(@PathVariable Long id) {
-        return ragEmbeddingCase.getById(id);
+        return ragEmbeddingService.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<RagEmbeddingResponse> create(@RequestBody RagEmbeddingRequest request) {
-        return ragEmbeddingCase.create(request);
+        return ragEmbeddingService.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<RagEmbeddingResponse> update(@RequestBody RagEmbeddingRequest request) {
-        return ragEmbeddingCase.update(request);
+        return ragEmbeddingService.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return ragEmbeddingCase.delete(id);
+        return ragEmbeddingService.delete(id);
     }
 }

@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.PromptDefinitionServiceApi;
 import xsj.auto.ops.plat.api.request.PromptDefinitionRequest;
 import xsj.auto.ops.plat.api.response.PromptDefinitionResponse;
-import xsj.auto.ops.plat.application.entityCase.impl.PromptDefinitionCaseImpl;
+import xsj.auto.ops.plat.application.entityCase.PromptDefinitionService;
 
 import java.util.List;
 
@@ -15,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PromptDefinitionController implements PromptDefinitionServiceApi {
 
-    private final PromptDefinitionCaseImpl promptDefinitionCase;
+    private final PromptDefinitionService promptDefinitionService;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<PromptDefinitionResponse>> list() {
-        return promptDefinitionCase.list();
+        return promptDefinitionService.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<PromptDefinitionResponse> getById(@PathVariable Long id) {
-        return promptDefinitionCase.getById(id);
+        return promptDefinitionService.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<PromptDefinitionResponse> create(@RequestBody PromptDefinitionRequest request) {
-        return promptDefinitionCase.create(request);
+        return promptDefinitionService.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<PromptDefinitionResponse> update(@RequestBody PromptDefinitionRequest request) {
-        return promptDefinitionCase.update(request);
+        return promptDefinitionService.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return promptDefinitionCase.delete(id);
+        return promptDefinitionService.delete(id);
     }
 }

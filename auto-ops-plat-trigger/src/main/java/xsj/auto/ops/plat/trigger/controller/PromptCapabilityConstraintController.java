@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.PromptCapabilityConstraintServiceApi;
 import xsj.auto.ops.plat.api.request.PromptCapabilityConstraintRequest;
 import xsj.auto.ops.plat.api.response.PromptCapabilityConstraintResponse;
-import xsj.auto.ops.plat.application.entityCase.impl.PromptCapabilityConstraintCaseImpl;
+import xsj.auto.ops.plat.application.entityCase.PromptCapabilityConstraintService;
 
 import java.util.List;
 
@@ -15,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PromptCapabilityConstraintController implements PromptCapabilityConstraintServiceApi {
 
-    private final PromptCapabilityConstraintCaseImpl promptCapabilityConstraintCase;
+    private final PromptCapabilityConstraintService promptCapabilityConstraintService;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<PromptCapabilityConstraintResponse>> list() {
-        return promptCapabilityConstraintCase.list();
+        return promptCapabilityConstraintService.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<PromptCapabilityConstraintResponse> getById(@PathVariable Long id) {
-        return promptCapabilityConstraintCase.getById(id);
+        return promptCapabilityConstraintService.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<PromptCapabilityConstraintResponse> create(@RequestBody PromptCapabilityConstraintRequest request) {
-        return promptCapabilityConstraintCase.create(request);
+        return promptCapabilityConstraintService.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<PromptCapabilityConstraintResponse> update(@RequestBody PromptCapabilityConstraintRequest request) {
-        return promptCapabilityConstraintCase.update(request);
+        return promptCapabilityConstraintService.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return promptCapabilityConstraintCase.delete(id);
+        return promptCapabilityConstraintService.delete(id);
     }
 }

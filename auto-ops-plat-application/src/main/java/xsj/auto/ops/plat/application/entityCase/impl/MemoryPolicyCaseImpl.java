@@ -3,11 +3,9 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import xsj.auto.ops.plat.api.common.ResultBody;
-import xsj.auto.ops.plat.api.http.MemoryPolicyServiceApi;
 import xsj.auto.ops.plat.api.request.MemoryPolicyRequest;
 import xsj.auto.ops.plat.api.response.MemoryPolicyResponse;
-import xsj.auto.ops.plat.application.entityCase.MemoryPolicyCase;
+import xsj.auto.ops.plat.application.entityCase.MemoryPolicyService;
 import xsj.auto.ops.plat.domain.entity.MemoryPolicy;
 import xsj.auto.ops.plat.domain.repository.MemoryPolicyRepository;
 
@@ -16,28 +14,27 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class MemoryPolicyCaseImpl implements MemoryPolicyServiceApi {
+public class MemoryPolicyCaseImpl implements MemoryPolicyService {
 
     private final MemoryPolicyRepository memoryPolicyRepository;
 
     @Override
-    public ResultBody<List<MemoryPolicyResponse>> list() {
-        return ResultBody.ok(memoryPolicyRepository.findAll().stream()
+    public List<MemoryPolicyResponse> list() {
+        return memoryPolicyRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @Override
-    public ResultBody<MemoryPolicyResponse> getById(Long id) {
+    public MemoryPolicyResponse getById(Long id) {
         return memoryPolicyRepository.findById(id)
                 .map(this::toResponse)
-                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public ResultBody<MemoryPolicyResponse> create(MemoryPolicyRequest request) {
+    public MemoryPolicyResponse create(MemoryPolicyRequest request) {
         MemoryPolicy entity = MemoryPolicy.create(
                 null,
                 request.getPolicyCode(),
@@ -53,12 +50,12 @@ public class MemoryPolicyCaseImpl implements MemoryPolicyServiceApi {
                 request.getActive()
         );
         memoryPolicyRepository.save(entity);
-        return ResultBody.ok(toResponse(entity));
+        return toResponse(entity);
     }
 
     @Override
     @Transactional
-    public ResultBody<MemoryPolicyResponse> update(MemoryPolicyRequest request) {
+    public MemoryPolicyResponse update(MemoryPolicyRequest request) {
         MemoryPolicy entity = MemoryPolicy.create(
                 request.getId(),
                 request.getPolicyCode(),
@@ -74,14 +71,13 @@ public class MemoryPolicyCaseImpl implements MemoryPolicyServiceApi {
                 request.getActive()
         );
         memoryPolicyRepository.save(entity);
-        return ResultBody.ok(toResponse(entity));
+        return toResponse(entity);
     }
 
     @Override
     @Transactional
-    public ResultBody<Void> delete(Long id) {
+    public void delete(Long id) {
         memoryPolicyRepository.deleteById(id);
-        return ResultBody.ok();
     }
 
     private MemoryPolicyResponse toResponse(MemoryPolicy entity) {

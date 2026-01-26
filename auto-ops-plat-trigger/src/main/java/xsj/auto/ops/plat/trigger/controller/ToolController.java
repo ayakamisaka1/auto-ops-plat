@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.ToolServiceApi;
 import xsj.auto.ops.plat.api.request.ToolRequest;
 import xsj.auto.ops.plat.api.response.ToolResponse;
-import xsj.auto.ops.plat.application.entityCase.impl.ToolCaseImpl;
+import xsj.auto.ops.plat.application.entityCase.ToolService;
 
 import java.util.List;
 
@@ -15,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ToolController implements ToolServiceApi {
 
-    private final ToolCaseImpl toolCase;
+    private final ToolService toolService;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<ToolResponse>> list() {
-        return toolCase.list();
+        return toolService.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<ToolResponse> getById(@PathVariable Long id) {
-        return toolCase.getById(id);
+        return toolService.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<ToolResponse> create(@RequestBody ToolRequest request) {
-        return toolCase.create(request);
+        return toolService.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<ToolResponse> update(@RequestBody ToolRequest request) {
-        return toolCase.update(request);
+        return toolService.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return toolCase.delete(id);
+        return toolService.delete(id);
     }
 }

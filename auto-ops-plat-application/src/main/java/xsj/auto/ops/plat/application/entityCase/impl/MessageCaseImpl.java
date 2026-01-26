@@ -3,11 +3,9 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import xsj.auto.ops.plat.api.common.ResultBody;
-import xsj.auto.ops.plat.api.http.MessageServiceApi;
 import xsj.auto.ops.plat.api.request.MessageRequest;
 import xsj.auto.ops.plat.api.response.MessageResponse;
-import xsj.auto.ops.plat.application.entityCase.MessageCase;
+import xsj.auto.ops.plat.application.entityCase.MessageService;
 import xsj.auto.ops.plat.domain.entity.Message;
 import xsj.auto.ops.plat.domain.repository.MessageRepository;
 
@@ -16,28 +14,27 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class MessageCaseImpl implements MessageServiceApi {
+public class MessageCaseImpl implements MessageService {
 
     private final MessageRepository messageRepository;
 
     @Override
-    public ResultBody<List<MessageResponse>> list() {
-        return ResultBody.ok(messageRepository.findAll().stream()
+    public List<MessageResponse> list() {
+        return messageRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @Override
-    public ResultBody<MessageResponse> getById(Long id) {
+    public MessageResponse getById(Long id) {
         return messageRepository.findById(id)
                 .map(this::toResponse)
-                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public ResultBody<MessageResponse> create(MessageRequest request) {
+    public MessageResponse create(MessageRequest request) {
         Message entity = Message.create(
                 null,
                 request.getConversationId(),
@@ -49,12 +46,12 @@ public class MessageCaseImpl implements MessageServiceApi {
                 request.getToolPayload()
         );
         messageRepository.save(entity);
-        return ResultBody.ok(toResponse(entity));
+        return toResponse(entity);
     }
 
     @Override
     @Transactional
-    public ResultBody<MessageResponse> update(MessageRequest request) {
+    public MessageResponse update(MessageRequest request) {
         Message entity = Message.create(
                 request.getId(),
                 request.getConversationId(),
@@ -66,14 +63,13 @@ public class MessageCaseImpl implements MessageServiceApi {
                 request.getToolPayload()
         );
         messageRepository.save(entity);
-        return ResultBody.ok(toResponse(entity));
+        return toResponse(entity);
     }
 
     @Override
     @Transactional
-    public ResultBody<Void> delete(Long id) {
+    public void delete(Long id) {
         messageRepository.deleteById(id);
-        return ResultBody.ok();
     }
 
     private MessageResponse toResponse(Message entity) {

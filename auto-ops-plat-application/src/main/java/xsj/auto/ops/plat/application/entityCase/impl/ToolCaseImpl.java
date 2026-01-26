@@ -3,11 +3,9 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import xsj.auto.ops.plat.api.common.ResultBody;
-import xsj.auto.ops.plat.api.http.ToolServiceApi;
 import xsj.auto.ops.plat.api.request.ToolRequest;
 import xsj.auto.ops.plat.api.response.ToolResponse;
-import xsj.auto.ops.plat.application.entityCase.ToolCase;
+import xsj.auto.ops.plat.application.entityCase.ToolService;
 import xsj.auto.ops.plat.domain.entity.Tool;
 import xsj.auto.ops.plat.domain.repository.ToolRepository;
 
@@ -16,28 +14,27 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ToolCaseImpl implements ToolServiceApi {
+public class ToolCaseImpl implements ToolService {
 
     private final ToolRepository toolRepository;
 
     @Override
-    public ResultBody<List<ToolResponse>> list() {
-        return ResultBody.ok(toolRepository.findAll().stream()
+    public List<ToolResponse> list() {
+        return toolRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @Override
-    public ResultBody<ToolResponse> getById(Long id) {
+    public ToolResponse getById(Long id) {
         return toolRepository.findById(id)
                 .map(this::toResponse)
-                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public ResultBody<ToolResponse> create(ToolRequest request) {
+    public ToolResponse create(ToolRequest request) {
         Tool entity = Tool.create(
                 null,
                 request.getToolCode(),
@@ -51,12 +48,12 @@ public class ToolCaseImpl implements ToolServiceApi {
                 request.getStatus()
         );
         toolRepository.save(entity);
-        return ResultBody.ok(toResponse(entity));
+        return toResponse(entity);
     }
 
     @Override
     @Transactional
-    public ResultBody<ToolResponse> update(ToolRequest request) {
+    public ToolResponse update(ToolRequest request) {
         Tool entity = Tool.create(
                 request.getId(),
                 request.getToolCode(),
@@ -70,14 +67,13 @@ public class ToolCaseImpl implements ToolServiceApi {
                 request.getStatus()
         );
         toolRepository.save(entity);
-        return ResultBody.ok(toResponse(entity));
+        return toResponse(entity);
     }
 
     @Override
     @Transactional
-    public ResultBody<Void> delete(Long id) {
+    public void delete(Long id) {
         toolRepository.deleteById(id);
-        return ResultBody.ok();
     }
 
     private ToolResponse toResponse(Tool entity) {

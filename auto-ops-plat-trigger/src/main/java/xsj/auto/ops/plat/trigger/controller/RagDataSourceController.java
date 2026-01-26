@@ -6,7 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.RagDataSourceServiceApi;
 import xsj.auto.ops.plat.api.request.RagDataSourceRequest;
 import xsj.auto.ops.plat.api.response.RagDataSourceResponse;
-import xsj.auto.ops.plat.application.entityCase.impl.RagDataSourceCaseImpl;
+import xsj.auto.ops.plat.application.entityCase.RagDataSourceService;
 
 import java.util.List;
 
@@ -15,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RagDataSourceController implements RagDataSourceServiceApi {
 
-    private final RagDataSourceCaseImpl ragDataSourceCase;
+    private final RagDataSourceService ragDataSourceService;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<RagDataSourceResponse>> list() {
-        return ragDataSourceCase.list();
+        return ragDataSourceService.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<RagDataSourceResponse> getById(@PathVariable Long id) {
-        return ragDataSourceCase.getById(id);
+        return ragDataSourceService.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<RagDataSourceResponse> create(@RequestBody RagDataSourceRequest request) {
-        return ragDataSourceCase.create(request);
+        return ragDataSourceService.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<RagDataSourceResponse> update(@RequestBody RagDataSourceRequest request) {
-        return ragDataSourceCase.update(request);
+        return ragDataSourceService.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return ragDataSourceCase.delete(id);
+        return ragDataSourceService.delete(id);
     }
 }
