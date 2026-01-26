@@ -20,30 +20,31 @@ public class PromptDefinitionController implements PromptDefinitionServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<PromptDefinitionResponse>> list() {
-        return promptDefinitionService.list();
+        return ResultBody.ok(promptDefinitionService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<PromptDefinitionResponse> getById(@PathVariable Long id) {
-        return promptDefinitionService.getById(id);
+        return ResultBody.ok(promptDefinitionService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<PromptDefinitionResponse> create(@RequestBody PromptDefinitionRequest request) {
-        return promptDefinitionService.create(request);
+        return ResultBody.ok(promptDefinitionService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<PromptDefinitionResponse> update(@RequestBody PromptDefinitionRequest request) {
-        return promptDefinitionService.update(request);
+        return ResultBody.ok(promptDefinitionService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return promptDefinitionService.delete(id);
+        promptDefinitionService.delete(id);
+        return ResultBody.ok();
     }
 }

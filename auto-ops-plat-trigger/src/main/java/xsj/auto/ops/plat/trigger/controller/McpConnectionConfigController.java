@@ -20,30 +20,31 @@ public class McpConnectionConfigController implements McpConnectionConfigService
     @Override
     @GetMapping("/list")
     public ResultBody<List<McpConnectionConfigResponse>> list() {
-        return mcpConnectionConfigService.list();
+        return ResultBody.ok(mcpConnectionConfigService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<McpConnectionConfigResponse> getById(@PathVariable Long id) {
-        return mcpConnectionConfigService.getById(id);
+        return ResultBody.ok(mcpConnectionConfigService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<McpConnectionConfigResponse> create(@RequestBody McpConnectionConfigRequest request) {
-        return mcpConnectionConfigService.create(request);
+        return ResultBody.ok(mcpConnectionConfigService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<McpConnectionConfigResponse> update(@RequestBody McpConnectionConfigRequest request) {
-        return mcpConnectionConfigService.update(request);
+        return ResultBody.ok(mcpConnectionConfigService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return mcpConnectionConfigService.delete(id);
+        mcpConnectionConfigService.delete(id);
+        return ResultBody.ok();
     }
 }

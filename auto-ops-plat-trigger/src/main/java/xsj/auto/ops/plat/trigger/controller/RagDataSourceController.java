@@ -20,30 +20,31 @@ public class RagDataSourceController implements RagDataSourceServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<RagDataSourceResponse>> list() {
-        return ragDataSourceService.list();
+        return ResultBody.ok(ragDataSourceService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<RagDataSourceResponse> getById(@PathVariable Long id) {
-        return ragDataSourceService.getById(id);
+        return ResultBody.ok(ragDataSourceService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<RagDataSourceResponse> create(@RequestBody RagDataSourceRequest request) {
-        return ragDataSourceService.create(request);
+        return ResultBody.ok(ragDataSourceService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<RagDataSourceResponse> update(@RequestBody RagDataSourceRequest request) {
-        return ragDataSourceService.update(request);
+        return ResultBody.ok(ragDataSourceService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return ragDataSourceService.delete(id);
+        ragDataSourceService.delete(id);
+        return ResultBody.ok();
     }
 }

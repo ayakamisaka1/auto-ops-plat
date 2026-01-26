@@ -20,30 +20,31 @@ public class RagEmbeddingController implements RagEmbeddingServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<RagEmbeddingResponse>> list() {
-        return ragEmbeddingService.list();
+        return ResultBody.ok(ragEmbeddingService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<RagEmbeddingResponse> getById(@PathVariable Long id) {
-        return ragEmbeddingService.getById(id);
+        return ResultBody.ok(ragEmbeddingService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<RagEmbeddingResponse> create(@RequestBody RagEmbeddingRequest request) {
-        return ragEmbeddingService.create(request);
+        return ResultBody.ok(ragEmbeddingService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<RagEmbeddingResponse> update(@RequestBody RagEmbeddingRequest request) {
-        return ragEmbeddingService.update(request);
+        return ResultBody.ok(ragEmbeddingService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return ragEmbeddingService.delete(id);
+        ragEmbeddingService.delete(id);
+        return ResultBody.ok();
     }
 }

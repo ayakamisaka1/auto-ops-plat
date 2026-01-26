@@ -20,30 +20,31 @@ public class RagRetrievalStrategyController implements RagRetrievalStrategyServi
     @Override
     @GetMapping("/list")
     public ResultBody<List<RagRetrievalStrategyResponse>> list() {
-        return ragRetrievalStrategyService.list();
+        return ResultBody.ok(ragRetrievalStrategyService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<RagRetrievalStrategyResponse> getById(@PathVariable Long id) {
-        return ragRetrievalStrategyService.getById(id);
+        return ResultBody.ok(ragRetrievalStrategyService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<RagRetrievalStrategyResponse> create(@RequestBody RagRetrievalStrategyRequest request) {
-        return ragRetrievalStrategyService.create(request);
+        return ResultBody.ok(ragRetrievalStrategyService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<RagRetrievalStrategyResponse> update(@RequestBody RagRetrievalStrategyRequest request) {
-        return ragRetrievalStrategyService.update(request);
+        return ResultBody.ok(ragRetrievalStrategyService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return ragRetrievalStrategyService.delete(id);
+        ragRetrievalStrategyService.delete(id);
+        return ResultBody.ok();
     }
 }

@@ -20,30 +20,31 @@ public class ConversationSummaryController implements ConversationSummaryService
     @Override
     @GetMapping("/list")
     public ResultBody<List<ConversationSummaryResponse>> list() {
-        return conversationSummaryService.list();
+        return ResultBody.ok(conversationSummaryService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<ConversationSummaryResponse> getById(@PathVariable Long id) {
-        return conversationSummaryService.getById(id);
+        return ResultBody.ok(conversationSummaryService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<ConversationSummaryResponse> create(@RequestBody ConversationSummaryRequest request) {
-        return conversationSummaryService.create(request);
+        return ResultBody.ok(conversationSummaryService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<ConversationSummaryResponse> update(@RequestBody ConversationSummaryRequest request) {
-        return conversationSummaryService.update(request);
+        return ResultBody.ok(conversationSummaryService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return conversationSummaryService.delete(id);
+        conversationSummaryService.delete(id);
+        return ResultBody.ok();
     }
 }

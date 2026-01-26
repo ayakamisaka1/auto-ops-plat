@@ -20,30 +20,31 @@ public class McpServiceController implements McpServiceServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<McpServiceResponse>> list() {
-        return mcpServiceService.list();
+        return ResultBody.ok(mcpServiceService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<McpServiceResponse> getById(@PathVariable Long id) {
-        return mcpServiceService.getById(id);
+        return ResultBody.ok(mcpServiceService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<McpServiceResponse> create(@RequestBody McpServiceRequest request) {
-        return mcpServiceService.create(request);
+        return ResultBody.ok(mcpServiceService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<McpServiceResponse> update(@RequestBody McpServiceRequest request) {
-        return mcpServiceService.update(request);
+        return ResultBody.ok(mcpServiceService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return mcpServiceService.delete(id);
+        mcpServiceService.delete(id);
+        return ResultBody.ok();
     }
 }

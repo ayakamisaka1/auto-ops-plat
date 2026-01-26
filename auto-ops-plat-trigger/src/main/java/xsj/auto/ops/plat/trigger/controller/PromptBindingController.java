@@ -20,30 +20,31 @@ public class PromptBindingController implements PromptBindingServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<PromptBindingResponse>> list() {
-        return promptBindingService.list();
+        return ResultBody.ok(promptBindingService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<PromptBindingResponse> getById(@PathVariable Long id) {
-        return promptBindingService.getById(id);
+        return ResultBody.ok(promptBindingService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<PromptBindingResponse> create(@RequestBody PromptBindingRequest request) {
-        return promptBindingService.create(request);
+        return ResultBody.ok(promptBindingService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<PromptBindingResponse> update(@RequestBody PromptBindingRequest request) {
-        return promptBindingService.update(request);
+        return ResultBody.ok(promptBindingService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return promptBindingService.delete(id);
+        promptBindingService.delete(id);
+        return ResultBody.ok();
     }
 }

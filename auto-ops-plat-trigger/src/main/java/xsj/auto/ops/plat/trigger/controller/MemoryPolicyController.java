@@ -20,30 +20,31 @@ public class MemoryPolicyController implements MemoryPolicyServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<MemoryPolicyResponse>> list() {
-        return memoryPolicyService.list();
+        return ResultBody.ok(memoryPolicyService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<MemoryPolicyResponse> getById(@PathVariable Long id) {
-        return memoryPolicyService.getById(id);
+        return ResultBody.ok(memoryPolicyService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<MemoryPolicyResponse> create(@RequestBody MemoryPolicyRequest request) {
-        return memoryPolicyService.create(request);
+        return ResultBody.ok(memoryPolicyService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<MemoryPolicyResponse> update(@RequestBody MemoryPolicyRequest request) {
-        return memoryPolicyService.update(request);
+        return ResultBody.ok(memoryPolicyService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return memoryPolicyService.delete(id);
+        memoryPolicyService.delete(id);
+        return ResultBody.ok();
     }
 }

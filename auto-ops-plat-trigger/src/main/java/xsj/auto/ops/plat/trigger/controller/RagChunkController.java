@@ -20,30 +20,31 @@ public class RagChunkController implements RagChunkServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<RagChunkResponse>> list() {
-        return ragChunkService.list();
+        return ResultBody.ok(ragChunkService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<RagChunkResponse> getById(@PathVariable Long id) {
-        return ragChunkService.getById(id);
+        return ResultBody.ok(ragChunkService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<RagChunkResponse> create(@RequestBody RagChunkRequest request) {
-        return ragChunkService.create(request);
+        return ResultBody.ok(ragChunkService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<RagChunkResponse> update(@RequestBody RagChunkRequest request) {
-        return ragChunkService.update(request);
+        return ResultBody.ok(ragChunkService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return ragChunkService.delete(id);
+        ragChunkService.delete(id);
+        return ResultBody.ok();
     }
 }

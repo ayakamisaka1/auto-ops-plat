@@ -20,30 +20,31 @@ public class ToolController implements ToolServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<ToolResponse>> list() {
-        return toolService.list();
+        return ResultBody.ok(toolService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<ToolResponse> getById(@PathVariable Long id) {
-        return toolService.getById(id);
+        return ResultBody.ok(toolService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<ToolResponse> create(@RequestBody ToolRequest request) {
-        return toolService.create(request);
+        return ResultBody.ok(toolService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<ToolResponse> update(@RequestBody ToolRequest request) {
-        return toolService.update(request);
+        return ResultBody.ok(toolService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return toolService.delete(id);
+        toolService.delete(id);
+        return ResultBody.ok();
     }
 }

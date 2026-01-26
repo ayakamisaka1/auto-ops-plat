@@ -20,30 +20,31 @@ public class RagDocumentController implements RagDocumentServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<RagDocumentResponse>> list() {
-        return ragDocumentService.list();
+        return ResultBody.ok(ragDocumentService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<RagDocumentResponse> getById(@PathVariable Long id) {
-        return ragDocumentService.getById(id);
+        return ResultBody.ok(ragDocumentService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<RagDocumentResponse> create(@RequestBody RagDocumentRequest request) {
-        return ragDocumentService.create(request);
+        return ResultBody.ok(ragDocumentService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<RagDocumentResponse> update(@RequestBody RagDocumentRequest request) {
-        return ragDocumentService.update(request);
+        return ResultBody.ok(ragDocumentService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return ragDocumentService.delete(id);
+        ragDocumentService.delete(id);
+        return ResultBody.ok();
     }
 }

@@ -20,30 +20,31 @@ public class ToolModelBindingController implements ToolModelBindingServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<ToolModelBindingResponse>> list() {
-        return toolModelBindingService.list();
+        return ResultBody.ok(toolModelBindingService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<ToolModelBindingResponse> getById(@PathVariable Long id) {
-        return toolModelBindingService.getById(id);
+        return ResultBody.ok(toolModelBindingService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<ToolModelBindingResponse> create(@RequestBody ToolModelBindingRequest request) {
-        return toolModelBindingService.create(request);
+        return ResultBody.ok(toolModelBindingService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<ToolModelBindingResponse> update(@RequestBody ToolModelBindingRequest request) {
-        return toolModelBindingService.update(request);
+        return ResultBody.ok(toolModelBindingService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return toolModelBindingService.delete(id);
+        toolModelBindingService.delete(id);
+        return ResultBody.ok();
     }
 }

@@ -20,30 +20,31 @@ public class PromptCapabilityConstraintController implements PromptCapabilityCon
     @Override
     @GetMapping("/list")
     public ResultBody<List<PromptCapabilityConstraintResponse>> list() {
-        return promptCapabilityConstraintService.list();
+        return ResultBody.ok(promptCapabilityConstraintService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<PromptCapabilityConstraintResponse> getById(@PathVariable Long id) {
-        return promptCapabilityConstraintService.getById(id);
+        return ResultBody.ok(promptCapabilityConstraintService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<PromptCapabilityConstraintResponse> create(@RequestBody PromptCapabilityConstraintRequest request) {
-        return promptCapabilityConstraintService.create(request);
+        return ResultBody.ok(promptCapabilityConstraintService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<PromptCapabilityConstraintResponse> update(@RequestBody PromptCapabilityConstraintRequest request) {
-        return promptCapabilityConstraintService.update(request);
+        return ResultBody.ok(promptCapabilityConstraintService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return promptCapabilityConstraintService.delete(id);
+        promptCapabilityConstraintService.delete(id);
+        return ResultBody.ok();
     }
 }

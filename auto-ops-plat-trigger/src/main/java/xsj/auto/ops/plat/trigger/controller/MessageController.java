@@ -20,30 +20,31 @@ public class MessageController implements MessageServiceApi {
     @Override
     @GetMapping("/list")
     public ResultBody<List<MessageResponse>> list() {
-        return messageService.list();
+        return ResultBody.ok(messageService.list());
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<MessageResponse> getById(@PathVariable Long id) {
-        return messageService.getById(id);
+        return ResultBody.ok(messageService.getById(id));
     }
 
     @Override
     @PostMapping
     public ResultBody<MessageResponse> create(@RequestBody MessageRequest request) {
-        return messageService.create(request);
+        return ResultBody.ok(messageService.create(request));
     }
 
     @Override
     @PutMapping
     public ResultBody<MessageResponse> update(@RequestBody MessageRequest request) {
-        return messageService.update(request);
+        return ResultBody.ok(messageService.update(request));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return messageService.delete(id);
+        messageService.delete(id);
+        return ResultBody.ok();
     }
 }
