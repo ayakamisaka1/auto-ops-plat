@@ -22,9 +22,10 @@ public class AgentMemoryBindingCaseImpl implements AgentMemoryBindingServiceApi 
 
     @Override
     public ResultBody<List<AgentMemoryBindingResponse>> list() {
-        return ResultBody.ok(agentMemoryBindingRepository.findAll().stream()
+        java.util.List<AgentMemoryBindingResponse> list = agentMemoryBindingRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+        return ResultBody.ok(list);
     }
 
     @Override

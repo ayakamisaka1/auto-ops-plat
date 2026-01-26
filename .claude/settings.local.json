@@ -7,7 +7,8 @@
       "Bash(find:*)",
       "Bash(mvn compile:*)",
       "Bash(java:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(mvn clean:*)"
     ]
   }
 }
