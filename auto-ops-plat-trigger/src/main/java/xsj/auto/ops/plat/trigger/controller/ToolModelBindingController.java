@@ -6,6 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.ToolModelBindingServiceApi;
 import xsj.auto.ops.plat.api.request.ToolModelBindingRequest;
 import xsj.auto.ops.plat.api.response.ToolModelBindingResponse;
+import xsj.auto.ops.plat.application.entityCase.ToolModelBindingCase;
 
 import java.util.List;
 
@@ -14,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ToolModelBindingController implements ToolModelBindingServiceApi {
 
-    private final ToolModelBindingServiceApi toolModelBindingServiceApi;
+    private final ToolModelBindingCase toolModelBindingCase;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<ToolModelBindingResponse>> list() {
-        return toolModelBindingServiceApi.list();
+        return toolModelBindingCase.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<ToolModelBindingResponse> getById(@PathVariable Long id) {
-        return toolModelBindingServiceApi.getById(id);
+        return toolModelBindingCase.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<ToolModelBindingResponse> create(@RequestBody ToolModelBindingRequest request) {
-        return toolModelBindingServiceApi.create(request);
+        return toolModelBindingCase.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<ToolModelBindingResponse> update(@RequestBody ToolModelBindingRequest request) {
-        return toolModelBindingServiceApi.update(request);
+        return toolModelBindingCase.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return toolModelBindingServiceApi.delete(id);
+        return toolModelBindingCase.delete(id);
     }
 }

@@ -3,6 +3,8 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import xsj.auto.ops.plat.api.common.ResultBody;
+import xsj.auto.ops.plat.api.http.ConversationSummaryServiceApi;
 import xsj.auto.ops.plat.api.request.ConversationSummaryRequest;
 import xsj.auto.ops.plat.api.response.ConversationSummaryResponse;
 import xsj.auto.ops.plat.application.entityCase.ConversationSummaryCase;
@@ -14,27 +16,28 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ConversationSummaryCaseImpl implements ConversationSummaryCase {
+public class ConversationSummaryCaseImpl implements ConversationSummaryServiceApi {
 
     private final ConversationSummaryRepository conversationSummaryRepository;
 
     @Override
-    public List<ConversationSummaryResponse> list() {
-        return conversationSummaryRepository.findAll().stream()
+    public ResultBody<List<ConversationSummaryResponse>> list() {
+        return ResultBody.ok(conversationSummaryRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public ConversationSummaryResponse getById(Long id) {
+    public ResultBody<ConversationSummaryResponse> getById(Long id) {
         return conversationSummaryRepository.findById(id)
                 .map(this::toResponse)
+                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public ConversationSummaryResponse create(ConversationSummaryRequest request) {
+    public ResultBody<ConversationSummaryResponse> create(ConversationSummaryRequest request) {
         ConversationSummary entity = ConversationSummary.create(
                 null,
                 request.getConversationId(),
@@ -44,12 +47,12 @@ public class ConversationSummaryCaseImpl implements ConversationSummaryCase {
                 request.getTokenCount()
         );
         conversationSummaryRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public ConversationSummaryResponse update(ConversationSummaryRequest request) {
+    public ResultBody<ConversationSummaryResponse> update(ConversationSummaryRequest request) {
         ConversationSummary entity = ConversationSummary.create(
                 request.getId(),
                 request.getConversationId(),
@@ -59,13 +62,14 @@ public class ConversationSummaryCaseImpl implements ConversationSummaryCase {
                 request.getTokenCount()
         );
         conversationSummaryRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public ResultBody<Void> delete(Long id) {
         conversationSummaryRepository.deleteById(id);
+        return ResultBody.ok();
     }
 
     private ConversationSummaryResponse toResponse(ConversationSummary entity) {

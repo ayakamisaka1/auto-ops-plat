@@ -6,6 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.PromptCapabilityConstraintServiceApi;
 import xsj.auto.ops.plat.api.request.PromptCapabilityConstraintRequest;
 import xsj.auto.ops.plat.api.response.PromptCapabilityConstraintResponse;
+import xsj.auto.ops.plat.application.entityCase.PromptCapabilityConstraintCase;
 
 import java.util.List;
 
@@ -14,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PromptCapabilityConstraintController implements PromptCapabilityConstraintServiceApi {
 
-    private final PromptCapabilityConstraintServiceApi promptCapabilityConstraintServiceApi;
+    private final PromptCapabilityConstraintCase promptCapabilityConstraintCase;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<PromptCapabilityConstraintResponse>> list() {
-        return promptCapabilityConstraintServiceApi.list();
+        return promptCapabilityConstraintCase.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<PromptCapabilityConstraintResponse> getById(@PathVariable Long id) {
-        return promptCapabilityConstraintServiceApi.getById(id);
+        return promptCapabilityConstraintCase.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<PromptCapabilityConstraintResponse> create(@RequestBody PromptCapabilityConstraintRequest request) {
-        return promptCapabilityConstraintServiceApi.create(request);
+        return promptCapabilityConstraintCase.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<PromptCapabilityConstraintResponse> update(@RequestBody PromptCapabilityConstraintRequest request) {
-        return promptCapabilityConstraintServiceApi.update(request);
+        return promptCapabilityConstraintCase.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return promptCapabilityConstraintServiceApi.delete(id);
+        return promptCapabilityConstraintCase.delete(id);
     }
 }

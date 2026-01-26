@@ -6,6 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.PromptBindingServiceApi;
 import xsj.auto.ops.plat.api.request.PromptBindingRequest;
 import xsj.auto.ops.plat.api.response.PromptBindingResponse;
+import xsj.auto.ops.plat.application.entityCase.PromptBindingCase;
 
 import java.util.List;
 
@@ -14,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PromptBindingController implements PromptBindingServiceApi {
 
-    private final PromptBindingServiceApi promptBindingServiceApi;
+    private final PromptBindingCase promptBindingCase;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<PromptBindingResponse>> list() {
-        return promptBindingServiceApi.list();
+        return promptBindingCase.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<PromptBindingResponse> getById(@PathVariable Long id) {
-        return promptBindingServiceApi.getById(id);
+        return promptBindingCase.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<PromptBindingResponse> create(@RequestBody PromptBindingRequest request) {
-        return promptBindingServiceApi.create(request);
+        return promptBindingCase.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<PromptBindingResponse> update(@RequestBody PromptBindingRequest request) {
-        return promptBindingServiceApi.update(request);
+        return promptBindingCase.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return promptBindingServiceApi.delete(id);
+        return promptBindingCase.delete(id);
     }
 }

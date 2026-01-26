@@ -6,6 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.McpConnectionConfigServiceApi;
 import xsj.auto.ops.plat.api.request.McpConnectionConfigRequest;
 import xsj.auto.ops.plat.api.response.McpConnectionConfigResponse;
+import xsj.auto.ops.plat.application.entityCase.McpConnectionConfigCase;
 
 import java.util.List;
 
@@ -14,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class McpConnectionConfigController implements McpConnectionConfigServiceApi {
 
-    private final McpConnectionConfigServiceApi mcpConnectionConfigServiceApi;
+    private final McpConnectionConfigCase mcpConnectionConfigCase;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<McpConnectionConfigResponse>> list() {
-        return mcpConnectionConfigServiceApi.list();
+        return mcpConnectionConfigCase.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<McpConnectionConfigResponse> getById(@PathVariable Long id) {
-        return mcpConnectionConfigServiceApi.getById(id);
+        return mcpConnectionConfigCase.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<McpConnectionConfigResponse> create(@RequestBody McpConnectionConfigRequest request) {
-        return mcpConnectionConfigServiceApi.create(request);
+        return mcpConnectionConfigCase.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<McpConnectionConfigResponse> update(@RequestBody McpConnectionConfigRequest request) {
-        return mcpConnectionConfigServiceApi.update(request);
+        return mcpConnectionConfigCase.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return mcpConnectionConfigServiceApi.delete(id);
+        return mcpConnectionConfigCase.delete(id);
     }
 }

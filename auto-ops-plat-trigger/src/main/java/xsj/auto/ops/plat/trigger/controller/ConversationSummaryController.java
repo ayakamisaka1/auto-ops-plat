@@ -6,6 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.ConversationSummaryServiceApi;
 import xsj.auto.ops.plat.api.request.ConversationSummaryRequest;
 import xsj.auto.ops.plat.api.response.ConversationSummaryResponse;
+import xsj.auto.ops.plat.application.entityCase.ConversationSummaryCase;
 
 import java.util.List;
 
@@ -14,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ConversationSummaryController implements ConversationSummaryServiceApi {
 
-    private final ConversationSummaryServiceApi conversationSummaryServiceApi;
+    private final ConversationSummaryCase conversationSummaryCase;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<ConversationSummaryResponse>> list() {
-        return conversationSummaryServiceApi.list();
+        return conversationSummaryCase.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<ConversationSummaryResponse> getById(@PathVariable Long id) {
-        return conversationSummaryServiceApi.getById(id);
+        return conversationSummaryCase.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<ConversationSummaryResponse> create(@RequestBody ConversationSummaryRequest request) {
-        return conversationSummaryServiceApi.create(request);
+        return conversationSummaryCase.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<ConversationSummaryResponse> update(@RequestBody ConversationSummaryRequest request) {
-        return conversationSummaryServiceApi.update(request);
+        return conversationSummaryCase.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return conversationSummaryServiceApi.delete(id);
+        return conversationSummaryCase.delete(id);
     }
 }

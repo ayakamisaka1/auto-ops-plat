@@ -3,6 +3,8 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import xsj.auto.ops.plat.api.common.ResultBody;
+import xsj.auto.ops.plat.api.http.RagEmbeddingServiceApi;
 import xsj.auto.ops.plat.api.request.RagEmbeddingRequest;
 import xsj.auto.ops.plat.api.response.RagEmbeddingResponse;
 import xsj.auto.ops.plat.application.entityCase.RagEmbeddingCase;
@@ -14,27 +16,28 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RagEmbeddingCaseImpl implements RagEmbeddingCase {
+public class RagEmbeddingCaseImpl implements RagEmbeddingServiceApi {
 
     private final RagEmbeddingRepository ragEmbeddingRepository;
 
     @Override
-    public List<RagEmbeddingResponse> list() {
-        return ragEmbeddingRepository.findAll().stream()
+    public ResultBody<List<RagEmbeddingResponse>> list() {
+        return ResultBody.ok(ragEmbeddingRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public RagEmbeddingResponse getById(Long id) {
+    public ResultBody<RagEmbeddingResponse> getById(Long id) {
         return ragEmbeddingRepository.findById(id)
                 .map(this::toResponse)
+                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public RagEmbeddingResponse create(RagEmbeddingRequest request) {
+    public ResultBody<RagEmbeddingResponse> create(RagEmbeddingRequest request) {
         RagEmbedding entity = RagEmbedding.create(
                 null,
                 request.getChunkId(),
@@ -44,12 +47,12 @@ public class RagEmbeddingCaseImpl implements RagEmbeddingCase {
                 request.getStatus()
         );
         ragEmbeddingRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public RagEmbeddingResponse update(RagEmbeddingRequest request) {
+    public ResultBody<RagEmbeddingResponse> update(RagEmbeddingRequest request) {
         RagEmbedding entity = RagEmbedding.create(
                 request.getId(),
                 request.getChunkId(),
@@ -59,13 +62,14 @@ public class RagEmbeddingCaseImpl implements RagEmbeddingCase {
                 request.getStatus()
         );
         ragEmbeddingRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public ResultBody<Void> delete(Long id) {
         ragEmbeddingRepository.deleteById(id);
+        return ResultBody.ok();
     }
 
     private RagEmbeddingResponse toResponse(RagEmbedding entity) {

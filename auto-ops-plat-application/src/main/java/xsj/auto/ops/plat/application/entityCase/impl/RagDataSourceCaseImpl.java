@@ -3,6 +3,8 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import xsj.auto.ops.plat.api.common.ResultBody;
+import xsj.auto.ops.plat.api.http.RagDataSourceServiceApi;
 import xsj.auto.ops.plat.api.request.RagDataSourceRequest;
 import xsj.auto.ops.plat.api.response.RagDataSourceResponse;
 import xsj.auto.ops.plat.application.entityCase.RagDataSourceCase;
@@ -14,27 +16,28 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RagDataSourceCaseImpl implements RagDataSourceCase {
+public class RagDataSourceCaseImpl implements RagDataSourceServiceApi {
 
     private final RagDataSourceRepository ragDataSourceRepository;
 
     @Override
-    public List<RagDataSourceResponse> list() {
-        return ragDataSourceRepository.findAll().stream()
+    public ResultBody<List<RagDataSourceResponse>> list() {
+        return ResultBody.ok(ragDataSourceRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public RagDataSourceResponse getById(Long id) {
+    public ResultBody<RagDataSourceResponse> getById(Long id) {
         return ragDataSourceRepository.findById(id)
                 .map(this::toResponse)
+                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public RagDataSourceResponse create(RagDataSourceRequest request) {
+    public ResultBody<RagDataSourceResponse> create(RagDataSourceRequest request) {
         RagDataSource entity = RagDataSource.create(
                 null,
                 request.getSourceName(),
@@ -45,12 +48,12 @@ public class RagDataSourceCaseImpl implements RagDataSourceCase {
                 request.getEnabled()
         );
         ragDataSourceRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public RagDataSourceResponse update(RagDataSourceRequest request) {
+    public ResultBody<RagDataSourceResponse> update(RagDataSourceRequest request) {
         RagDataSource entity = RagDataSource.create(
                 request.getId(),
                 request.getSourceName(),
@@ -61,13 +64,14 @@ public class RagDataSourceCaseImpl implements RagDataSourceCase {
                 request.getEnabled()
         );
         ragDataSourceRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public ResultBody<Void> delete(Long id) {
         ragDataSourceRepository.deleteById(id);
+        return ResultBody.ok();
     }
 
     private RagDataSourceResponse toResponse(RagDataSource entity) {

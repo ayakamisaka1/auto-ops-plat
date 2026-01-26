@@ -3,6 +3,8 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import xsj.auto.ops.plat.api.common.ResultBody;
+import xsj.auto.ops.plat.api.http.ToolModelBindingServiceApi;
 import xsj.auto.ops.plat.api.request.ToolModelBindingRequest;
 import xsj.auto.ops.plat.api.response.ToolModelBindingResponse;
 import xsj.auto.ops.plat.application.entityCase.ToolModelBindingCase;
@@ -14,27 +16,28 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ToolModelBindingCaseImpl implements ToolModelBindingCase {
+public class ToolModelBindingCaseImpl implements ToolModelBindingServiceApi {
 
     private final ToolModelBindingRepository toolModelBindingRepository;
 
     @Override
-    public List<ToolModelBindingResponse> list() {
-        return toolModelBindingRepository.findAll().stream()
+    public ResultBody<List<ToolModelBindingResponse>> list() {
+        return ResultBody.ok(toolModelBindingRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public ToolModelBindingResponse getById(Long id) {
+    public ResultBody<ToolModelBindingResponse> getById(Long id) {
         return toolModelBindingRepository.findById(id)
                 .map(this::toResponse)
+                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public ToolModelBindingResponse create(ToolModelBindingRequest request) {
+    public ResultBody<ToolModelBindingResponse> create(ToolModelBindingRequest request) {
         ToolModelBinding entity = ToolModelBinding.create(
                 null,
                 request.getToolId(),
@@ -44,12 +47,12 @@ public class ToolModelBindingCaseImpl implements ToolModelBindingCase {
                 request.getRateLimit()
         );
         toolModelBindingRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public ToolModelBindingResponse update(ToolModelBindingRequest request) {
+    public ResultBody<ToolModelBindingResponse> update(ToolModelBindingRequest request) {
         ToolModelBinding entity = ToolModelBinding.create(
                 request.getId(),
                 request.getToolId(),
@@ -59,13 +62,14 @@ public class ToolModelBindingCaseImpl implements ToolModelBindingCase {
                 request.getRateLimit()
         );
         toolModelBindingRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public ResultBody<Void> delete(Long id) {
         toolModelBindingRepository.deleteById(id);
+        return ResultBody.ok();
     }
 
     private ToolModelBindingResponse toResponse(ToolModelBinding entity) {

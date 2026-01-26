@@ -6,6 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.McpServiceServiceApi;
 import xsj.auto.ops.plat.api.request.McpServiceRequest;
 import xsj.auto.ops.plat.api.response.McpServiceResponse;
+import xsj.auto.ops.plat.application.entityCase.McpServiceCase;
 
 import java.util.List;
 
@@ -14,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class McpServiceController implements McpServiceServiceApi {
 
-    private final McpServiceServiceApi mcpServiceServiceApi;
+    private final McpServiceCase mcpServiceCase;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<McpServiceResponse>> list() {
-        return mcpServiceServiceApi.list();
+        return mcpServiceCase.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<McpServiceResponse> getById(@PathVariable Long id) {
-        return mcpServiceServiceApi.getById(id);
+        return mcpServiceCase.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<McpServiceResponse> create(@RequestBody McpServiceRequest request) {
-        return mcpServiceServiceApi.create(request);
+        return mcpServiceCase.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<McpServiceResponse> update(@RequestBody McpServiceRequest request) {
-        return mcpServiceServiceApi.update(request);
+        return mcpServiceCase.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return mcpServiceServiceApi.delete(id);
+        return mcpServiceCase.delete(id);
     }
 }

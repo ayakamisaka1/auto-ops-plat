@@ -6,6 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.ConversationServiceApi;
 import xsj.auto.ops.plat.api.request.ConversationRequest;
 import xsj.auto.ops.plat.api.response.ConversationResponse;
+import xsj.auto.ops.plat.application.entityCase.ConversationCase;
 
 import java.util.List;
 
@@ -14,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ConversationController implements ConversationServiceApi {
 
-    private final ConversationServiceApi conversationServiceApi;
+    private final ConversationCase conversationCase;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<ConversationResponse>> list() {
-        return conversationServiceApi.list();
+        return conversationCase.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<ConversationResponse> getById(@PathVariable Long id) {
-        return conversationServiceApi.getById(id);
+        return conversationCase.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<ConversationResponse> create(@RequestBody ConversationRequest request) {
-        return conversationServiceApi.create(request);
+        return conversationCase.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<ConversationResponse> update(@RequestBody ConversationRequest request) {
-        return conversationServiceApi.update(request);
+        return conversationCase.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return conversationServiceApi.delete(id);
+        return conversationCase.delete(id);
     }
 }

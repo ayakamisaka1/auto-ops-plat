@@ -3,6 +3,8 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import xsj.auto.ops.plat.api.common.ResultBody;
+import xsj.auto.ops.plat.api.http.McpConnectionConfigServiceApi;
 import xsj.auto.ops.plat.api.request.McpConnectionConfigRequest;
 import xsj.auto.ops.plat.api.response.McpConnectionConfigResponse;
 import xsj.auto.ops.plat.application.entityCase.McpConnectionConfigCase;
@@ -14,27 +16,28 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class McpConnectionConfigCaseImpl implements McpConnectionConfigCase {
+public class McpConnectionConfigCaseImpl implements McpConnectionConfigServiceApi {
 
     private final McpConnectionConfigRepository mcpConnectionConfigRepository;
 
     @Override
-    public List<McpConnectionConfigResponse> list() {
-        return mcpConnectionConfigRepository.findAll().stream()
+    public ResultBody<List<McpConnectionConfigResponse>> list() {
+        return ResultBody.ok(mcpConnectionConfigRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public McpConnectionConfigResponse getById(Long id) {
+    public ResultBody<McpConnectionConfigResponse> getById(Long id) {
         return mcpConnectionConfigRepository.findById(id)
                 .map(this::toResponse)
+                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public McpConnectionConfigResponse create(McpConnectionConfigRequest request) {
+    public ResultBody<McpConnectionConfigResponse> create(McpConnectionConfigRequest request) {
         McpConnectionConfig entity = McpConnectionConfig.create(
                 null,
                 request.getName(),
@@ -50,12 +53,12 @@ public class McpConnectionConfigCaseImpl implements McpConnectionConfigCase {
                 request.getMcpServerId()
         );
         mcpConnectionConfigRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public McpConnectionConfigResponse update(McpConnectionConfigRequest request) {
+    public ResultBody<McpConnectionConfigResponse> update(McpConnectionConfigRequest request) {
         McpConnectionConfig entity = McpConnectionConfig.create(
                 request.getId(),
                 request.getName(),
@@ -71,13 +74,14 @@ public class McpConnectionConfigCaseImpl implements McpConnectionConfigCase {
                 request.getMcpServerId()
         );
         mcpConnectionConfigRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public ResultBody<Void> delete(Long id) {
         mcpConnectionConfigRepository.deleteById(id);
+        return ResultBody.ok();
     }
 
     private McpConnectionConfigResponse toResponse(McpConnectionConfig entity) {

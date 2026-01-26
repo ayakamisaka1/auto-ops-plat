@@ -3,6 +3,8 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import xsj.auto.ops.plat.api.common.ResultBody;
+import xsj.auto.ops.plat.api.http.ConversationServiceApi;
 import xsj.auto.ops.plat.api.request.ConversationRequest;
 import xsj.auto.ops.plat.api.response.ConversationResponse;
 import xsj.auto.ops.plat.application.entityCase.ConversationCase;
@@ -14,27 +16,28 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ConversationCaseImpl implements ConversationCase {
+public class ConversationCaseImpl implements ConversationServiceApi {
 
     private final ConversationRepository conversationRepository;
 
     @Override
-    public List<ConversationResponse> list() {
-        return conversationRepository.findAll().stream()
+    public ResultBody<List<ConversationResponse>> list() {
+        return ResultBody.ok(conversationRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public ConversationResponse getById(Long id) {
+    public ResultBody<ConversationResponse> getById(Long id) {
         return conversationRepository.findById(id)
                 .map(this::toResponse)
+                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public ConversationResponse create(ConversationRequest request) {
+    public ResultBody<ConversationResponse> create(ConversationRequest request) {
         Conversation entity = Conversation.create(
                 null,
                 request.getConversationId(),
@@ -46,12 +49,12 @@ public class ConversationCaseImpl implements ConversationCase {
                 request.getEndedAt()
         );
         conversationRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public ConversationResponse update(ConversationRequest request) {
+    public ResultBody<ConversationResponse> update(ConversationRequest request) {
         Conversation entity = Conversation.create(
                 request.getId(),
                 request.getConversationId(),
@@ -63,13 +66,14 @@ public class ConversationCaseImpl implements ConversationCase {
                 request.getEndedAt()
         );
         conversationRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public ResultBody<Void> delete(Long id) {
         conversationRepository.deleteById(id);
+        return ResultBody.ok();
     }
 
     private ConversationResponse toResponse(Conversation entity) {

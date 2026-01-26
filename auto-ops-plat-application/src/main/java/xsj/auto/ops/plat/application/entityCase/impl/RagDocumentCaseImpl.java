@@ -3,6 +3,8 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import xsj.auto.ops.plat.api.common.ResultBody;
+import xsj.auto.ops.plat.api.http.RagDocumentServiceApi;
 import xsj.auto.ops.plat.api.request.RagDocumentRequest;
 import xsj.auto.ops.plat.api.response.RagDocumentResponse;
 import xsj.auto.ops.plat.application.entityCase.RagDocumentCase;
@@ -14,27 +16,28 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RagDocumentCaseImpl implements RagDocumentCase {
+public class RagDocumentCaseImpl implements RagDocumentServiceApi {
 
     private final RagDocumentRepository ragDocumentRepository;
 
     @Override
-    public List<RagDocumentResponse> list() {
-        return ragDocumentRepository.findAll().stream()
+    public ResultBody<List<RagDocumentResponse>> list() {
+        return ResultBody.ok(ragDocumentRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public RagDocumentResponse getById(Long id) {
+    public ResultBody<RagDocumentResponse> getById(Long id) {
         return ragDocumentRepository.findById(id)
                 .map(this::toResponse)
+                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public RagDocumentResponse create(RagDocumentRequest request) {
+    public ResultBody<RagDocumentResponse> create(RagDocumentRequest request) {
         RagDocument entity = RagDocument.create(
                 null,
                 request.getSourceId(),
@@ -46,12 +49,12 @@ public class RagDocumentCaseImpl implements RagDocumentCase {
                 request.getVersion()
         );
         ragDocumentRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public RagDocumentResponse update(RagDocumentRequest request) {
+    public ResultBody<RagDocumentResponse> update(RagDocumentRequest request) {
         RagDocument entity = RagDocument.create(
                 request.getId(),
                 request.getSourceId(),
@@ -63,13 +66,14 @@ public class RagDocumentCaseImpl implements RagDocumentCase {
                 request.getVersion()
         );
         ragDocumentRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public ResultBody<Void> delete(Long id) {
         ragDocumentRepository.deleteById(id);
+        return ResultBody.ok();
     }
 
     private RagDocumentResponse toResponse(RagDocument entity) {

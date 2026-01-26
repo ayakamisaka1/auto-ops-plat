@@ -6,6 +6,7 @@ import xsj.auto.ops.plat.api.common.ResultBody;
 import xsj.auto.ops.plat.api.http.RagRetrievalStrategyServiceApi;
 import xsj.auto.ops.plat.api.request.RagRetrievalStrategyRequest;
 import xsj.auto.ops.plat.api.response.RagRetrievalStrategyResponse;
+import xsj.auto.ops.plat.application.entityCase.RagRetrievalStrategyCase;
 
 import java.util.List;
 
@@ -14,35 +15,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RagRetrievalStrategyController implements RagRetrievalStrategyServiceApi {
 
-    private final RagRetrievalStrategyServiceApi ragRetrievalStrategyServiceApi;
+    private final RagRetrievalStrategyCase ragRetrievalStrategyCase;
 
     @Override
     @GetMapping("/list")
     public ResultBody<List<RagRetrievalStrategyResponse>> list() {
-        return ragRetrievalStrategyServiceApi.list();
+        return ragRetrievalStrategyCase.list();
     }
 
     @Override
     @GetMapping("/{id}")
     public ResultBody<RagRetrievalStrategyResponse> getById(@PathVariable Long id) {
-        return ragRetrievalStrategyServiceApi.getById(id);
+        return ragRetrievalStrategyCase.getById(id);
     }
 
     @Override
     @PostMapping
     public ResultBody<RagRetrievalStrategyResponse> create(@RequestBody RagRetrievalStrategyRequest request) {
-        return ragRetrievalStrategyServiceApi.create(request);
+        return ragRetrievalStrategyCase.create(request);
     }
 
     @Override
     @PutMapping
     public ResultBody<RagRetrievalStrategyResponse> update(@RequestBody RagRetrievalStrategyRequest request) {
-        return ragRetrievalStrategyServiceApi.update(request);
+        return ragRetrievalStrategyCase.update(request);
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResultBody<Void> delete(@PathVariable Long id) {
-        return ragRetrievalStrategyServiceApi.delete(id);
+        return ragRetrievalStrategyCase.delete(id);
     }
 }

@@ -3,6 +3,8 @@ package xsj.auto.ops.plat.application.entityCase.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import xsj.auto.ops.plat.api.common.ResultBody;
+import xsj.auto.ops.plat.api.http.PromptBindingServiceApi;
 import xsj.auto.ops.plat.api.request.PromptBindingRequest;
 import xsj.auto.ops.plat.api.response.PromptBindingResponse;
 import xsj.auto.ops.plat.application.entityCase.PromptBindingCase;
@@ -14,27 +16,28 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class PromptBindingCaseImpl implements PromptBindingCase {
+public class PromptBindingCaseImpl implements PromptBindingServiceApi {
 
     private final PromptBindingRepository promptBindingRepository;
 
     @Override
-    public List<PromptBindingResponse> list() {
-        return promptBindingRepository.findAll().stream()
+    public ResultBody<List<PromptBindingResponse>> list() {
+        return ResultBody.ok(promptBindingRepository.findAll().stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Override
-    public PromptBindingResponse getById(Long id) {
+    public ResultBody<PromptBindingResponse> getById(Long id) {
         return promptBindingRepository.findById(id)
                 .map(this::toResponse)
+                .map(ResultBody::ok)
                 .orElse(null);
     }
 
     @Override
     @Transactional
-    public PromptBindingResponse create(PromptBindingRequest request) {
+    public ResultBody<PromptBindingResponse> create(PromptBindingRequest request) {
         PromptBinding entity = PromptBinding.create(
                 null,
                 request.getBindType(),
@@ -44,12 +47,12 @@ public class PromptBindingCaseImpl implements PromptBindingCase {
                 request.getEnabled()
         );
         promptBindingRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public PromptBindingResponse update(PromptBindingRequest request) {
+    public ResultBody<PromptBindingResponse> update(PromptBindingRequest request) {
         PromptBinding entity = PromptBinding.create(
                 request.getId(),
                 request.getBindType(),
@@ -59,13 +62,14 @@ public class PromptBindingCaseImpl implements PromptBindingCase {
                 request.getEnabled()
         );
         promptBindingRepository.save(entity);
-        return toResponse(entity);
+        return ResultBody.ok(toResponse(entity));
     }
 
     @Override
     @Transactional
-    public void delete(Long id) {
+    public ResultBody<Void> delete(Long id) {
         promptBindingRepository.deleteById(id);
+        return ResultBody.ok();
     }
 
     private PromptBindingResponse toResponse(PromptBinding entity) {
