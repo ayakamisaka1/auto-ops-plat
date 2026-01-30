@@ -1,4 +1,4 @@
-package xsj.auto.ops.plat.domain.entity.LlmFactoryEntity;
+package xsj.auto.ops.plat.domain.entity.LlmfactoryEntity;
 
 import lombok.Getter;
 
